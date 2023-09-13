@@ -60,16 +60,16 @@ module testbench_complete();
         case(i_buttons)
             3'b000: // Asigno dato A
                 begin
-                    i_switches <= $urandom;
+                    i_switches <= $random;
                     i_buttons <= 3'b001;
                     #1
                     dato_A <= i_switches;
-                    $display("Dato A: %b (%d)", i_switches, $signed(i_switches)); 
+                    $display("Dato A: %b (%d) (%h)", i_switches, $signed(i_switches), $signed(i_switches)); 
                 end
 
             3'b001: // Asigno dato B
                 begin
-                    i_switches <= $urandom;
+                    i_switches <= $random;
                     i_buttons <= 3'b010;
                     #1
                     dato_B <= i_switches;
