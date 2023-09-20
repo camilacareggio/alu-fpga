@@ -20,6 +20,7 @@ module testbench_complete();
 
     // clock signal
     reg clk;
+    reg i_reset;
     
     // in out
     reg [BITS_DATA-1 : 0] i_switches;
@@ -34,6 +35,7 @@ module testbench_complete();
 
     initial begin
     clk = 1'b0;
+    i_reset = 1'b0;
     i_switches = {BITS_DATA {1'b0}};
     i_buttons = 3'b000;
     codeOperation = {ADD, SUB, AND, OR, XOR, SRA, SRL, NOR};
@@ -48,8 +50,9 @@ module testbench_complete();
         .BUTTONS (BUTTONS)
     )
     u_complete_alu (
-        .i_switches (i_switches),
         .clk (clk),
+        .i_reset(i_reset),
+        .i_switches (i_switches),
         .i_buttons (i_buttons),
         .o_result (o_resultado)
     );
@@ -75,14 +78,14 @@ module testbench_complete();
                     dato_B <= i_switches;
                     $display("Dato B: %b (%d) (%h)", i_switches, $signed(i_switches), $signed(i_switches));
                 end
-            3'b010: // Asigno Operaci髇
+            3'b010: // Asigno Operaci贸n
                 begin
                     //i_switches <= ADD;
                     i_switches <= codeOperation[($urandom % 10) * BITS_OP +: BITS_OP];
                     i_buttons <= 3'b100;
                     #1
                     operacion <= i_switches;
-                    $display("Operaci髇: %b (%d) (%h)", i_switches, i_switches, $signed(i_switches));
+                    $display("Operaci贸n: %b (%d) (%h)", i_switches, i_switches, $signed(i_switches));
                 end
             3'b100: // Muestro y verifico Resultado
                 begin 
@@ -94,10 +97,10 @@ module testbench_complete();
                         AND: esperado = dato_A & dato_B;
                         OR : esperado = dato_A | dato_B;
                         XOR: esperado = dato_A ^ dato_B;
-                        SRA: esperado = dato_A >> dato_B; // desplazamiento aritm閠ico a la derecha
-                        SRL: esperado = dato_A >>> dato_B; // desplazamiento l骻ico a la derecha
+                        SRA: esperado = dato_A >> dato_B; // desplazamiento aritm茅tico a la derecha
+                        SRL: esperado = dato_A >>> dato_B; // desplazamiento l贸gico a la derecha
                         NOR: esperado = ~(dato_A | dato_B);
-                        default: esperado = {BITS_DATA{1'b0}}; // resultado 0 si la operaci髇 no es v醠ida
+                        default: esperado = {BITS_DATA{1'b0}}; // resultado 0 si la operaci贸n no es v谩lida
                     endcase
                     $display("RESULTADO: %b (%d) (%h)", o_resultado, $signed(o_resultado), $signed(o_resultado));
                     if (o_resultado == esperado) begin

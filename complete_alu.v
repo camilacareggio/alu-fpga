@@ -8,6 +8,7 @@ module complete_alu #(
         parameter BUTTONS = 3
     )(
         input wire clk,
+        input wire i_reset,
         input wire signed [BITS_DATA-1:0] i_switches,
         input wire [BUTTONS-1:0] i_buttons, // indicates which value is the input (001: i_a, 010: i_b, 100: i_op)
         output wire signed [BITS_DATA-1:0] o_result
@@ -22,6 +23,11 @@ module complete_alu #(
         if(i_buttons[0]) dato_A <= i_switches;
         if(i_buttons[1]) dato_B <= i_switches;
         if(i_buttons[2]) operacion <= i_switches;
+        if(i_reset) begin
+            dato_A <= {BITS_DATA {1'b0}};
+            dato_B <= {BITS_DATA {1'b0}};
+            operacion <= {BITS_OP {1'b0}};
+        end
     end
     
     alu #(
