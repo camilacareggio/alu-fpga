@@ -32,10 +32,10 @@ module alu #(
             AND: result = i_a & i_b;
             OR : result = i_a | i_b;
             XOR: result = i_a ^ i_b;
-            SRA: result = i_a >> i_b; // desplazamiento aritmÈtico a la derecha
-            SRL: result = i_a >>> i_b; // desplazamiento lÛgico a la derecha
+            SRA: result = i_a >>> i_b; // desplazamiento aritm√©tico a la derecha
+            SRL: result = i_a >> i_b; // desplazamiento l√≥gico a la derecha
             NOR: result = ~(i_a | i_b);
-            default: result = {BITS_DATA{1'b0}}; // resultado 0 si la operaciÛn no es v·lida
+            default: result = {BITS_DATA{1'b0}}; // resultado 0 si la operacion no es v√°lida
         endcase
     end
 
