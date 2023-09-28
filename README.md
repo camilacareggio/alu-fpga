@@ -1,5 +1,6 @@
 # TP1: ALU
 ## Arquitectura de Computadoras
+## Alumna: Camila Careggio
 
 ### Consigna
 Implementar en FPGA Basys3 una ALU.
