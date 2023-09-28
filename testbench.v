@@ -97,8 +97,8 @@ module testbench_complete();
                         AND: esperado = dato_A & dato_B;
                         OR : esperado = dato_A | dato_B;
                         XOR: esperado = dato_A ^ dato_B;
-                        SRA: esperado = dato_A >> dato_B; // desplazamiento aritmético a la derecha
-                        SRL: esperado = dato_A >>> dato_B; // desplazamiento lógico a la derecha
+                        SRA: esperado = dato_A >>> dato_B; // desplazamiento aritmético a la derecha
+                        SRL: esperado = dato_A >> dato_B; // desplazamiento lógico a la derecha
                         NOR: esperado = ~(dato_A | dato_B);
                         default: esperado = {BITS_DATA{1'b0}}; // resultado 0 si la operación no es válida
                     endcase
